@@ -9,7 +9,7 @@
 
     <title>Laravel Migration Seeder</title>
 </head>
-<body>
+<body class="text-bg-dark">
 
     @yield('content')
 
