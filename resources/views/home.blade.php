@@ -22,16 +22,16 @@
                 <tbody>
                     @foreach ($trains as $train)
                     <tr>
-                        <th scope="row">{{$train->id}}</th>
-                        <td>{{$train->Codice_Treno}}</td>
-                        <td>{{$train->Azienda}}</td>
-                        <td>{{$train->Stazione_di_partenza}}</td>
-                        <td>{{$train->Stazione_di_arrivo}}</td>
-                        <td>{{$train->date}}</td>
-                        <td>{{$train->Orario_di_partenza}}</td>
-                        <td>{{$train->Orario_di_arrivo}}</td>
-                        <td>{{$train->In_orario ? 'True' : 'False'}}</td>
-                        <td>{{$train->Cancellato ? 'True' : 'False'}}</td>
+                        <th scope="row">{{ $train->id }}</th>
+                        <td>{{ $train->train_code }}</td>
+                        <td>{{ $train->company }}</td>
+                        <td>{{ $train->departure_station }}</td>
+                        <td>{{ $train->arrival_station }}</td>
+                        <td>{{ $train->date }}</td>
+                        <td>{{ $train->departure_time }}</td>
+                        <td>{{ $train->arrival_time }}</td>
+                        <td>{{ $train->in_time ? 'True' : 'False'}}</td>
+                        <td>{{ $train->deleted ? 'True' : 'False'}}</td>
                     </tr>
                     @endforeach
                 </tbody>
