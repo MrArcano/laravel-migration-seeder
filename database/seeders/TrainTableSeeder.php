@@ -6,6 +6,8 @@ use App\Models\Train;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
+use Illuminate\Support\Str;
+use Illuminate\Support\Carbon;
 
 
 class TrainTableSeeder extends Seeder
@@ -18,29 +20,49 @@ class TrainTableSeeder extends Seeder
     public function run(Faker $faker)
     {
 
+        // Seeder with Faker Generator
+        // for ($i = 0; $i < 10; $i++) {
+        //     $train = new Train();
+        //     $train->company = "Trenitalia";
+        //     $train->departure_station = $faker->city();
+        //     $train->arrival_station = $faker->city();
+        //     $train->train_code = $faker->regexify('[A-Z]{2}[0-9]{6}');
+        //     $train->date= date_format($faker->dateTimeInInterval('-1 years', '+2 years'),'Y-m-d');
+        //     $train->departure_time = $faker->time('H:i:s');
+        //     $train->arrival_time = $faker->time('H:i:s');
+        //     $train->number_carriages = $faker->numberBetween(0, 8);
+        //     $train->in_time = $faker->numberBetween(0, 1);
+        //     $train->deleted = $faker->numberBetween(0, 1);
+        //     $train->slug = $this->generateSlug($train->train_code,$train->departure_station, $train->arrival_station);
+        //     // save train
+        //     $train->save();
+        // }
 
-        for ($i = 0; $i < 10; $i++) {
+        // Seeder with CSV
+        $data_csv = fopen(__DIR__."/trains.csv","r");
+        $index = 0;
+        while (($row = fgetcsv($data_csv)) !== false) {
+            if($index>0){
+                $train = new Train();
 
-            $train = new Train();
+                $train->company = $row[0];
+                $train->departure_station = $row[1];
+                $train->arrival_station = $row[2];
+                $train->train_code = $row[5];
+                $train->date= date_format($row[3],'Y-m-d');
+                $train->departure_time = date_format($row[3],'H:i:s');
+                $train->arrival_time = date_format($row[4],'H:i:s');
+                $train->number_carriages = $row[6];
+                $train->in_time = $row[7];
+                $train->deleted = $row[8];
+                $train->slug = $this->generateSlug($train->train_code,$train->departure_station, $train->arrival_station);
 
-            $train->company = "Trenitalia";
-            // $train->departure_station = 'roma';
-            // $train->arrival_station = 'milano';
-            // $train->train_code = 'R54684';
-            $train->departure_station = $faker->city();
-            $train->arrival_station = $faker->city();
-            $train->train_code = $faker->regexify('[A-Z]{2}[0-9]{6}');
-            $train->date= date_format($faker->dateTimeInInterval('-1 years', '+2 years'),'Y-m-d');
-            $train->departure_time = $faker->time('H:i:s');
-            $train->arrival_time = $faker->time('H:i:s');
-            $train->number_carriages = $faker->numberBetween(0, 8);
-            $train->in_time = $faker->numberBetween(0, 1);
-            $train->deleted = $faker->numberBetween(0, 1);
+                s
 
-            $train->slug = $this->generateSlug($train->train_code,$train->departure_station, $train->arrival_station);
-
-            // save train
-            $train->save();
+                // save train
+                $train->save();
+            }
+            $index++;
         }
     }
 

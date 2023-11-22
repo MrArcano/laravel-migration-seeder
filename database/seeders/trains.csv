@@ -1,0 +1,7 @@
+company,departure_station,arrival_station,departure_time,arrival_time,train_code,wagons_number,on_time,cancelled
+tranitalia,roma,milano,2022-11-23 10:00:00,2022-11-23 12:00:00,AB123,8,1,0
+tranitalia,milano,napoli,2022-11-24 10:00:00,2022-11-24 12:00:00,AB124,8,1,0
+tranitalia,napoli,roma,2022-11-25 10:00:00,2022-11-25 12:00:00,AB125,8,1,0
+tranitalia,roma,milano,2022-11-26 10:00:00,2022-11-26 12:00:00,AB126,10,1,0
+tranitalia,milano,napoli,2022-11-27 10:00:00,2022-11-27 12:00:00,AB127,10,1,0
+tranitalia,napoli,roma,2022-11-28 10:00:00,2022-11-28 12:00:00,AB128,10,0,1
