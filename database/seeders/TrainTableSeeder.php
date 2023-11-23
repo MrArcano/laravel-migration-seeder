@@ -45,19 +45,18 @@ class TrainTableSeeder extends Seeder
             if($index>0){
                 $train = new Train();
 
+
                 $train->company = $row[0];
                 $train->departure_station = $row[1];
                 $train->arrival_station = $row[2];
                 $train->train_code = $row[5];
-                $train->date= date_format($row[3],'Y-m-d');
-                $train->departure_time = date_format($row[3],'H:i:s');
-                $train->arrival_time = date_format($row[4],'H:i:s');
+                $train->date= date('Y-m-d',strtotime($row[3]));
+                $train->departure_time = date('H:i:s',strtotime($row[3]));
+                $train->arrival_time = date('H:i:s',strtotime($row[4]));
                 $train->number_carriages = $row[6];
                 $train->in_time = $row[7];
                 $train->deleted = $row[8];
                 $train->slug = $this->generateSlug($train->train_code,$train->departure_station, $train->arrival_station);
-
-                s
 
                 // save train
                 $train->save();
