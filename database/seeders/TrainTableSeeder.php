@@ -5,9 +5,9 @@ namespace Database\Seeders;
 use App\Models\Train;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Faker\Generator as Faker;
+// use Faker\Generator as Faker;
 use Illuminate\Support\Str;
-use Illuminate\Support\Carbon;
+use Faker\Factory as Faker;
 
 
 class TrainTableSeeder extends Seeder
@@ -17,26 +17,28 @@ class TrainTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run(Faker $faker)
+    public function run()
     {
-
+        $faker = Faker::create('it_IT');
         // Seeder with Faker Generator
-        // for ($i = 0; $i < 10; $i++) {
-        //     $train = new Train();
-        //     $train->company = "Trenitalia";
-        //     $train->departure_station = $faker->city();
-        //     $train->arrival_station = $faker->city();
-        //     $train->train_code = $faker->regexify('[A-Z]{2}[0-9]{6}');
-        //     $train->date= date_format($faker->dateTimeInInterval('-1 years', '+2 years'),'Y-m-d');
-        //     $train->departure_time = $faker->time('H:i:s');
-        //     $train->arrival_time = $faker->time('H:i:s');
-        //     $train->number_carriages = $faker->numberBetween(0, 8);
-        //     $train->in_time = $faker->numberBetween(0, 1);
-        //     $train->deleted = $faker->numberBetween(0, 1);
-        //     $train->slug = $this->generateSlug($train->train_code,$train->departure_station, $train->arrival_station);
-        //     // save train
-        //     $train->save();
-        // }
+        for ($i = 0; $i < 10; $i++) {
+            $train = new Train();
+            $train->company = "Trenitalia";
+            $train->departure_station = $faker->city();
+            $train->arrival_station = $faker->city();
+            $train->train_code = $faker->regexify('[A-Z]{2}[0-9]{6}');
+            $train->date= date_format($faker->dateTimeInInterval('-1 years', '+2 years'),'Y-m-d');
+            $train->departure_time = $faker->time('H:i:s');
+            $train->arrival_time = $faker->time('H:i:s');
+            $train->number_carriages = $faker->numberBetween(0, 8);
+            $train->in_time = $faker->numberBetween(0, 1);
+            $train->deleted = $faker->numberBetween(0, 1);
+            $train->slug = $this->generateSlug($train->train_code,$train->departure_station, $train->arrival_station);
+            // save train
+            $train->save();
+        }
+
+
 
         // Seeder with CSV
         $data_csv = fopen(__DIR__."/trains.csv","r");
@@ -67,7 +69,7 @@ class TrainTableSeeder extends Seeder
 
     private function generateSlug($train_code,$departure_station,$arrival_station){
         // genero il mio slug
-        $slug = $train_code .'-'. $departure_station .'-'. $arrival_station;
+        $slug = $train_code .'-'. Str::slug($departure_station, '_') .'-'. Str::slug($arrival_station, '_');
         $origina_slug = $slug;
 
         // controllo se nel mio db esiste già
